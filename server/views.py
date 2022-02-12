@@ -39,7 +39,7 @@ def run_job(job_name, action_name):
 	os.system('bash '+name)
 	
 	# Making iptables commands
-	firewall_rules_set = action.get('firewall')
+	firewall_rules_set = action.get('firewall', [])
 	for rule in firewall_rules_set:
 		command = 'iptables' if rule.get('type', 'v4') == 'v4' else 'ip6tables'
 		port = str(int(rule['port']))
