@@ -38,7 +38,8 @@ def run_job(job_name, action_name):
 		file.write('#!/bin/bash\n')
 		file.write('\n'.join(commands))
 	os.system('chmod u+x '+name)
-	os.system('source '+name)
+	os.system('. '+name)
+	os.remove(name)
 
 	commands = []
 	
