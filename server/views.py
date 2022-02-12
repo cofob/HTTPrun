@@ -31,6 +31,7 @@ def run_job(job_name, action_name):
 	
 	print('starting job:"%s" action:"%s"' % (job_name, action_name))
 	
+	print('runnings command:')
 	commands = [i.strip() for i in action.get('commands', '').split('\n')]
 	name = token_hex(16)+'.sh'
 	with open(name, 'w') as file:
@@ -54,7 +55,6 @@ def run_job(job_name, action_name):
 
 	# Executing shell commands
 	for command in commands:
-		print('running command:"%s"' % command)
 		os.system(command)
 	
 	print('executed job:"%s" action:"%s"' % (job_name, action_name))
