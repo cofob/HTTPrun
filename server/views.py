@@ -37,7 +37,8 @@ def run_job(job_name, action_name):
 	with open(name, 'w') as file:
 		file.write('#!/bin/bash\n')
 		file.write('\n'.join(commands))
-	os.system('bash '+name)
+	os.system('chmod u+x '+name)
+	os.system('source '+name)
 	
 	# Making iptables commands
 	firewall_rules_set = action.get('firewall', [])
