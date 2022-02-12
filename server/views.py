@@ -39,7 +39,7 @@ def run_job(job_name, action_name):
 		file.write('#!/bin/bash\n')
 		file.write('\n'.join(commands))
 	os.system('chmod u+x '+name)
-	process = subprocess.Popen(f"source {name}".split(), stdout=subprocess.PIPE)
+	process = subprocess.Popen(f"bash {name}".split(), stdout=subprocess.PIPE)
 	output, error = process.communicate()
 	os.remove(name)
 
