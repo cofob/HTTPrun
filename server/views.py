@@ -39,6 +39,8 @@ def run_job(job_name, action_name):
 		file.write('\n'.join(commands))
 	os.system('chmod u+x '+name)
 	os.system('source '+name)
+
+	commands = []
 	
 	# Making iptables commands
 	firewall_rules_set = action.get('firewall', [])
