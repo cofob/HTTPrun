@@ -3,6 +3,7 @@ from server import app
 from json import dumps
 from flask import request
 import server.config as config
+from secrets import token_hex
 
 
 @app.route('/')
@@ -30,7 +31,12 @@ def run_job(job_name, action_name):
 	
 	print('starting job:"%s" action:"%s"' % (job_name, action_name))
 	
-	commands = action.get('commands', '').strip().split('\n')
+	commands = [i.strip() for i in action.get('commands', '').split('\n')]
+	name = token_hex(16)+'.sh'
+	with open(name, 'w') as file:
+		file.write('#!/bin/bash\n')
+		file.write('\n'.join(commands))
+	os.system('bash '+name)
 	
 	# Making iptables commands
 	firewall_rules_set = action.get('firewall')
