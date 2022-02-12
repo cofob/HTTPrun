@@ -4,6 +4,7 @@ from json import dumps
 from flask import request
 import server.config as config
 from secrets import token_hex
+import subprocess
 
 
 @app.route('/')
@@ -38,7 +39,8 @@ def run_job(job_name, action_name):
 		file.write('#!/bin/bash\n')
 		file.write('\n'.join(commands))
 	os.system('chmod u+x '+name)
-	os.system('. '+name)
+	process = subprocess.Popen(f"source {name}".split(), stdout=subprocess.PIPE)
+	output, error = process.communicate()
 	os.remove(name)
 
 	commands = []
